@@ -1,3 +1,4 @@
+# 使用者
 ##   APP Client - user Add 使用者註冊
 
 POST：https://aplchat.apollogaming.net/user/add
@@ -59,7 +60,7 @@ return
     }
 
 
-
+# 聊天訊息
 ##   APP Client - get message from stream 讀取頻道訊息
 
 listen：https://aplchat.apollogaming.net/chat/stream  
@@ -121,27 +122,6 @@ return
             "msg_message": "msg_1112"
         },
         {
-            "msg_id": 805,
-            "send_username": "U123456",
-            "msg_room_id": 10,
-            "msg_add_time": 1536301372,
-            "msg_message": "msg_1112"
-        },
-        {
-            "msg_id": 807,
-            "send_username": "U123456",
-            "msg_room_id": 10,
-            "msg_add_time": 1536301483,
-            "msg_message": "msg_1112"
-        },
-        {
-            "msg_id": 590,
-            "send_username": "WEB-001U",
-            "msg_room_id": 11,
-            "msg_add_time": 1534907233,
-            "msg_message": "666666"
-        },
-        {
             "msg_id": 644,
             "send_username": "WEB-001U",
             "msg_room_id": 11,
@@ -150,10 +130,10 @@ return
         }
     ]
 
-
+# 聊天室
 ##   APP Client - Add Room  ，創立 Room
 
-POST：https://aplchat.apollogaming.net/chatroom/add
+POST：https://aplchat.apollogaming.net/chat_room
 
 Header：Authorization    
 Value：Bearer + {{token}}
@@ -171,11 +151,31 @@ return
          "success": true
      }
      
+##   APP Client - List Room  ， Room 清單
+
+GET：https://aplchat.apollogaming.net/chat_room
+
+Header：Authorization    
+Value：Bearer + {{token}}
+
+return
+
+    [
+        {
+            "room_id": 5,
+            "room_name": "Hi Room 5"
+        },
+        {
+            "room_id": 21,
+            "room_name": "Hello Room 222"
+        }
+    ]
      
      
+# 聊天室成員
 ##   APP Client - Join Room  ，邀請進群，單次多人
 
-POST：https://aplchat.apollogaming.net/chatroom/join
+POST：https://aplchat.apollogaming.net/room_member
 
 Header：Authorization    
 Value：Bearer + {{token}}
@@ -196,10 +196,10 @@ return
         "success": true
     }
     
-    
+
 ##   APP Client - Kick Room  ，刪除成員
 
-POST：https://aplchat.apollogaming.net/chatroom/kick
+DELETE：https://aplchat.apollogaming.net/room_member
 
 Header：Authorization    
 Value：Bearer + {{token}}
@@ -220,7 +220,7 @@ return
 
 ##   APP Client - List Members  ，成員清單
 
-POST：https://aplchat.apollogaming.net/chatroom/listmembers
+POST：https://aplchat.apollogaming.net/room_member/list
 
 Header：Authorization    
 Value：Bearer + {{token}}
