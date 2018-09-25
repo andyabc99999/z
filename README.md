@@ -242,3 +242,82 @@ return
         "room_id": 10,
         "success": true
     }
+    
+    
+# 好友名單管理
+##   APP Client - Check User  ，確認用戶存在
+
+POST：https://aplchat.apollogaming.net/friend/check
+
+Header：Authorization    
+Value：Bearer + {{token}}
+
+    {
+      "username": "B123456"
+    }
+    
+return
+
+    {
+        "nick": "N123456",
+        "success": true,
+        "username": "B123456"
+    }
+    
+##   APP Client - Add Friend  ，加入好友
+
+POST：https://aplchat.apollogaming.net/friend
+
+Header：Authorization    
+Value：Bearer + {{token}}
+
+    {
+      "friend_mapping_name": "B123456"
+    }
+    
+return
+
+    {
+        "nick": "N123456",
+        "success": true,
+        "username": "B123456"
+    }
+    
+##   APP Client - DEL Friend  ，刪除好友
+
+DELETE：https://aplchat.apollogaming.net/friend
+
+Header：Authorization    
+Value：Bearer + {{token}}
+
+    {
+      "friend_mapping_name": "C123456"
+    }
+    
+return
+
+    {
+        "msg": "已刪除好友",
+        "success": true,
+        "username": "C123456"
+    }
+    
+##   APP Client -  Friend List ，好友清單
+
+GET：https://aplchat.apollogaming.net/friend
+
+Header：Authorization    
+Value：Bearer + {{token}}
+    
+return
+
+    [
+        {
+            "username": "B123456",
+            "nick": "N123456"
+        },
+        {
+            "username": "A123456",
+            "nick": "N123456"
+        }
+    ]
