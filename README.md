@@ -151,6 +151,27 @@ return
          "success": true
      }
      
+##   APP Client - Edit Room  ，修改 Room Name
+
+PUT：https://aplchat.apollogaming.net/chat_room
+
+Header：Authorization    
+Value：Bearer + {{token}}
+
+    {
+      "room_id": 10,
+      "room_name": "Room 2222"
+    }
+    
+return
+
+    {
+        "room_id": 10,
+        "room_name": "Room 2222",
+        "success": true
+    }
+     
+     
 ##   APP Client - List Room  ， Room 清單
 
 GET：https://aplchat.apollogaming.net/chat_room
@@ -321,5 +342,3 @@ return
             "nick": "N123456"
         }
     ]
-	
-	
