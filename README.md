@@ -7,7 +7,7 @@ Header：Content-Type
 Value：application/json
 
     {
-      "username": "A123456",
+      "username": "F123456",
       "nick":	"N123456",
       "password": "P123456"
     }
@@ -16,19 +16,8 @@ return
 
     {
         "success": true,
-        "user": {
-            "user_id": 26,
-            "username": "A12345671",
-            "password": "c5a9dcbefa6e0a11d7fc25645edb2e761050c663601855106129eeca3ee02e52",
-            "password_hash": "RDKJER",
-            "nick": "N123456",
-            "email": "",
-            "add_time": 1533524001,
-            "last_login_time": 0,
-            "login_times": 0,
-            "status": 0,
-            "room_id": 0
-        }
+        "user_id": 116,
+        "username": "F123456"
     }
     
 	or
@@ -89,7 +78,7 @@ return
         "msg_id": 807,
         "msg_message": "msg_1112",
         "msg_room_id": 10,
-        "send_username": "U123456"
+        "msg_user_id": 37
     }
 
 
@@ -116,14 +105,14 @@ return
     [
         {
             "msg_id": 802,
-            "send_username": "U123456",
+            "msg_user_id": 37,
             "msg_room_id": 10,
             "msg_add_time": 1536301324,
             "msg_message": "msg_1112"
         },
         {
             "msg_id": 644,
-            "send_username": "WEB-001U",
+            "msg_user_id": 37,
             "msg_room_id": 11,
             "msg_add_time": 1535006784,
             "msg_message": "666"
@@ -138,14 +127,21 @@ POST：https://aplchat.apollogaming.net/chat_room
 Header：Authorization    
 Value：Bearer + {{token}}
 
+空群(多人),無邀請成員：
+
     {
       "room_name": "Hello Room 111"
+    }
+
+1V1,創room並邀請：
+
+    {
+      "msg_user_id": 37
     }
     
 return
 
      {
-         "map_id": 34,
          "room_id": 19,
          "room_name": "Hello Room 111",
          "success": true
@@ -192,6 +188,27 @@ return
         }
     ]
      
+##   APP Client - List Room  ， Room + Last MSG ID 清單 
+
+GET：https://aplchat.apollogaming.net/chat_room/msg
+
+Header：Authorization    
+Value：Bearer + {{token}}
+
+return
+
+    [
+        {
+            "room_id": 5,
+            "room_name": "room-5",
+            "msg_id": 2441
+        },
+        {
+            "room_id": 10,
+            "room_name": "Room 2222",
+            "msg_id": 2462
+        }
+    ]
      
 # 聊天室成員
 ##   APP Client - Join Room  ，邀請進群，單次多人
@@ -203,9 +220,9 @@ Value：Bearer + {{token}}
 
     {
       "map_room_id": 10,
-      "map_username": [
-        "D123456",
-        "E123456"
+      "map_user_id": [
+        113,
+        114
       ]
     }
     
@@ -227,13 +244,13 @@ Value：Bearer + {{token}}
 
     {
       "map_room_id": 10,
-      "map_username": "B123456"
+      "msg_user_id" 37
     }
     
 return
 
     {
-        "map_username": "B123456",
+        "msg_user_id" 37,
         "msg": "剔除成員",
         "success": true
     }
@@ -247,18 +264,25 @@ Header：Authorization
 Value：Bearer + {{token}}
 
     {
-      "map_room_id": 10,
+      "map_room_id": 10
     }
     
 return
 
     {
         "members": [
-            "U123456",
-            "AAAAAA",
-            "Brook123",
-            "Nadal999",
-            "A123456"
+            {
+                "user_id": 37,
+                "nick": "N123456"
+            },
+            {
+                "user_id": 1,
+                "nick": "N123456"
+            },
+            {
+                "user_id": 113,
+                "nick": "N123456"
+            }
         ],
         "room_id": 10,
         "success": true
@@ -282,7 +306,7 @@ return
     {
         "nick": "N123456",
         "success": true,
-        "username": "B123456"
+        "user_id": 113
     }
     
 ##   APP Client - Add Friend  ，加入好友
@@ -293,7 +317,7 @@ Header：Authorization
 Value：Bearer + {{token}}
 
     {
-      "friend_mapping_name": "B123456"
+      "fd_map_user_id": 37
     }
     
 return
@@ -301,7 +325,7 @@ return
     {
         "nick": "N123456",
         "success": true,
-        "username": "B123456"
+        "fd_map_user_id": 113
     }
     
 ##   APP Client - DEL Friend  ，刪除好友
@@ -312,7 +336,7 @@ Header：Authorization
 Value：Bearer + {{token}}
 
     {
-      "friend_mapping_name": "C123456"
+      "fd_map_user_id": "B123456"
     }
     
 return
@@ -320,7 +344,7 @@ return
     {
         "msg": "已刪除好友",
         "success": true,
-        "username": "C123456"
+        "fd_map_user_id": 113
     }
     
 ##   APP Client -  Friend List ，好友清單
@@ -334,11 +358,11 @@ return
 
     [
         {
-            "username": "B123456",
+            "user_id": 113,
             "nick": "N123456"
         },
         {
-            "username": "A123456",
+            "user_id": 1,
             "nick": "N123456"
         }
     ]
